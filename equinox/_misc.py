@@ -1,6 +1,7 @@
 import jax
 import jax.core
 import jax.numpy as jnp
+from jax.typing import DTypeLike
 from jaxtyping import Array
 
 
@@ -9,11 +10,11 @@ def left_broadcast_to(arr: Array, shape: tuple[int, ...]) -> Array:
     return jnp.broadcast_to(arr, shape)
 
 
-def currently_jitting():
+def currently_jitting() -> bool:
     return isinstance(jnp.array(1) + 1, jax.core.Tracer)
 
 
-def default_floating_dtype():
+def default_floating_dtype() -> DTypeLike:
     if jax.config.jax_enable_x64:  # pyright: ignore
         return jnp.float64
     else:
